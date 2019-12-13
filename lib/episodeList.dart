@@ -20,61 +20,63 @@ class _EpisodeListState extends State<EpisodeList> {
         return widget.data['_embedded']['episodes'][index]['season'] == 4
             ? null
             : Card(
-                color: Colors.red[600],
-                child: Column(
-                  children: <Widget>[
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              widget.data['_embedded']['episodes'][index]
-                                  ['name'],
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.white,
-                              ),
-                            ),
-                            Text(
-                              widget.data['_embedded']['episodes'][index]
-                                      ['season']
-                                  .toString(),
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
+                color: Colors.red,
+                child: Container(
+                  height: 300,
+                  width: 450,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(widget.data['_embedded']
+                          ['episodes'][index]['image']['original']),
+                      fit: BoxFit.fitWidth,
+                      alignment: Alignment.topCenter,
+                    ),
+                  ),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        widget.data['_embedded']['episodes'][index]['name'],
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
                         ),
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: Text(
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
                             widget.data['_embedded']['episodes'][index]
-                                    ['number']
+                                    ['season']
                                 .toString(),
                             style: TextStyle(
                               fontSize: 20.0,
                               color: Colors.white,
                             ),
                           ),
-                        ),
-                        Image(
-                            image: CachedNetworkImageProvider(
-                                widget.data['_embedded']['episodes'][index]
-                                    ['image']['original'])),
-                        Text(
-                          removeAllHtmlTags(widget.data['_embedded']['episodes']
-                              [index]['summary']),
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            color: Colors.white,
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              widget.data['_embedded']['episodes'][index]
+                                      ['number']
+                                  .toString(),
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                          Text(
+                            removeAllHtmlTags(widget.data['_embedded']
+                                ['episodes'][index]['summary']),
+                            style: TextStyle(
+                              fontSize: 14.0,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
       },
