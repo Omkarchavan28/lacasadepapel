@@ -47,7 +47,7 @@ class _CastListState extends State<CastList> {
                     height: 60,
                     width: 450.0,
                     child: Container(
-                      color: Color.fromRGBO(10, 10, 10, 0.5),
+                      color: Color.fromRGBO(205, 92, 92, 0.4),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
