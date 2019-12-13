@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:lacasadepapel/episodeList.dart';
 
 String removeAllHtmlTags(String htmlText) {
   RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
@@ -88,72 +89,19 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: data['_embedded']['episodes'].length,
-              itemBuilder: (BuildContext context, int index) {
-                return data['_embedded']['episodes'][index]['season'] == 4
-                    ? null
-                    : Card(
-                        color: Colors.red[600],
-                        child: Container(
-                          // height: 500,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    data['_embedded']['episodes'][index]
-                                        ['name'],
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    data['_embedded']['episodes'][index]
-                                            ['season']
-                                        .toString(),
-                                    style: TextStyle(
-                                      fontSize: 20.0,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: Text(
-                                  data['_embedded']['episodes'][index]['number']
-                                      .toString(),
-                                  style: TextStyle(
-                                    fontSize: 20.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              Image(
-                                  image: CachedNetworkImageProvider(
-                                      data['_embedded']['episodes'][index]
-                                          ['image']['original'])),
-                              Text(
-                                removeAllHtmlTags(data['_embedded']['episodes']
-                                    [index]['summary']),
-                                style: TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-              },
+          RaisedButton(
+            onPressed: () {
+              // Navigator.push(context, 'episodes');
+            },
+            color: Colors.red[700],
+            child: Text(
+              'Episode List',
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
-          )
+          ),
+          EpisodeList()
         ],
       ),
     );
