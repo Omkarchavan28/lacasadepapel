@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lacasadepapel/castPage.dart';
 import 'package:lacasadepapel/episodePage.dart';
-import 'package:lacasadepapel/homePage.dart';
+import 'package:lacasadepapel/home.dart';
 
 void main() => runApp(MyApp());
 
