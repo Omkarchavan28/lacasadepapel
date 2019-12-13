@@ -40,7 +40,9 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Text('Title'),
       ),
-      body: data == null ? CircularProgressIndicator() : HomePage(data: data),
+      body: data == null
+          ? Center(child: CircularProgressIndicator())
+          : HomePage(data: data),
     );
   }
 }
@@ -70,9 +72,6 @@ class HomePage extends StatelessWidget {
           ),
           Container(
               height: 300.0,
-              // decoration: BoxDecoration(
-              //     color: Colors.red, borderRadius: BorderRadius.circular(20)),
-
               child: Image(
                   image:
                       CachedNetworkImageProvider(data['image']['original']))),
@@ -91,7 +90,7 @@ class HomePage extends StatelessWidget {
           ),
           RaisedButton(
             onPressed: () {
-              // Navigator.push(context, 'episodes');
+              Navigator.pushNamed(context, '/episodePage');
             },
             color: Colors.red[700],
             child: Text(
@@ -101,7 +100,19 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          EpisodeList()
+          RaisedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/castPage');
+            },
+            color: Colors.red[700],
+            child: Text(
+              'Cast ',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+          // EpisodeList()
         ],
       ),
     );
