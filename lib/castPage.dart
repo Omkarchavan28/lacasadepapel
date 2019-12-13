@@ -31,7 +31,7 @@ class _CastPageState extends State<CastPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Episodes')),
+      appBar: AppBar(title: Text('Cast')),
       body: data == null
           ? Center(child: CircularProgressIndicator())
           : CastList(data: data),
