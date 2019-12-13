@@ -2,13 +2,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:lacasadepapel/episodeList.dart';
-
-String removeAllHtmlTags(String htmlText) {
-  RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
-
-  return htmlText.replaceAll(exp, '');
-}
+import 'package:lacasadepapel/services/services.dart';
 
 class Home extends StatefulWidget {
   @override
