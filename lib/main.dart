@@ -11,6 +11,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'La Casa De Papel',
+      theme: new ThemeData(
+        primarySwatch: Colors.red,
+        secondaryHeaderColor: Colors.white,
+      ),
       initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the FirstScreen widget.
