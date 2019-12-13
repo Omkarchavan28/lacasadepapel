@@ -1,45 +1,5 @@
-import 'dart:convert';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:lacasadepapel/services/services.dart';
-
-class Home extends StatefulWidget {
-  @override
-  _HomeState createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  var data;
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
-  Future getData() async {
-    print('getting');
-    print(data);
-    http.Response res = await http.get(
-        'http://api.tvmaze.com/singlesearch/shows?q=money%20heist&embed=episodes');
-    data = jsonDecode(res.body);
-    setState(() {
-      print('got');
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Title'),
-      ),
-      body: data == null
-          ? Center(child: CircularProgressIndicator())
-          : HomePage(data: data),
-    );
-  }
-}
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -48,67 +8,187 @@ class HomePage extends StatelessWidget {
   }) : super(key: key);
 
   final data;
-  // final List<int> seasons = [1,2,3,4];
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
+    return LayoutBuilder(
+      builder: (context, constraints) => Stack(
         children: <Widget>[
-          Center(
-            child: Text(
-              data['name'],
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
           Container(
-              height: 300.0,
-              child: Image(
-                  image:
-                      CachedNetworkImageProvider(data['image']['original']))),
-          Container(
-            child: Text(removeAllHtmlTags(data['summary'])),
-          ),
-          RaisedButton(
-            onPressed: () {},
-            color: Colors.red[700],
-            child: Text(
-              'WATCH NOW',
-              style: TextStyle(
-                color: Colors.white,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: new AssetImage('assets/bg-1.jpg'),
+                fit: BoxFit.cover,
+                alignment: Alignment.topCenter,
               ),
             ),
           ),
-          RaisedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/episodePage');
-            },
-            color: Colors.red[700],
-            child: Text(
-              'Episode List',
-              style: TextStyle(
-                color: Colors.white,
+          Positioned(
+            top: constraints.maxHeight - 300,
+            // left: constraints.maxWidth - 180,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(8),
+                  width: 400,
+                  child: Text(removeAllHtmlTags(data['summary']),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 15, color: Colors.white)),
+                ),
+                RaisedButton.icon(
+                  icon: Icon(
+                    Icons.play_circle_outline,
+                    color: Colors.white,
+                    size: 25,
+                  ),
+                  splashColor: Colors.black87,
+                  onPressed: () {},
+                  color: Colors.red[700],
+                  label: Text(
+                    'Watch Now on Netflix',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            top: constraints.maxHeight - 100,
+            left: 20,
+            child: SizedBox(
+              width: 150,
+              height: 50,
+              child: RaisedButton.icon(
+                splashColor: Colors.black87,
+                icon: Icon(
+                  Icons.people_outline,
+                  color: Colors.white,
+                  size: 25,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/castPage');
+                },
+                color: Colors.red[700],
+                label: Container(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 2),
+                    child: Text(
+                      'Cast ',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
-          RaisedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/castPage');
-            },
-            color: Colors.red[700],
-            child: Text(
-              'Cast ',
-              style: TextStyle(
-                color: Colors.white,
+          Positioned(
+            top: constraints.maxHeight - 100,
+            left: constraints.maxWidth - 170,
+            child: SizedBox(
+              width: 150,
+              height: 50,
+              child: RaisedButton.icon(
+                splashColor: Colors.black87,
+                icon: Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.white,
+                  size: 15,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, '/episodePage');
+                },
+                color: Colors.red[700],
+                label: Text(
+                  'Episode List',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
               ),
             ),
           ),
-          // EpisodeList()
         ],
       ),
     );
+    // return Column(
+    //   children: <Widget>[
+    //     Container(
+    //       height: 300.0,
+    //       child: Image(
+    //         image: CachedNetworkImageProvider(data['image']['original']),
+    //       ),
+    //     ),
+    //     Container(
+    //       padding: EdgeInsets.all(10),
+    //       decoration: BoxDecoration(
+    //         color: Colors.white,
+    //         borderRadius: BorderRadius.circular(5),
+    //       ),
+    //       child: Text(
+    //         removeAllHtmlTags(data['summary']),
+    //         style: TextStyle(
+    //           fontSize: 20,
+    //           color: Colors.black,
+    //         ),
+    //       ),
+    //     ),
+    //     Card(
+    //       color: Colors.white,
+    //       child: Padding(
+    //         padding: const EdgeInsets.all(10.0),
+    //         child: Column(
+    //           children: <Widget>[
+    //             RaisedButton(
+    //               onPressed: () {},
+    //               color: Colors.red[700],
+    //               child: Text(
+    //                 'Watch Now on Netflix',
+    //                 style: TextStyle(
+    //                   color: Colors.white,
+    //                 ),
+    //               ),
+    //             ),
+    //             RaisedButton.icon(
+    //               icon: Icon(
+    //                 Icons.arrow_forward_ios,
+    //                 color: Colors.white,
+    //                 size: 15,
+    //               ),
+    //               onPressed: () {
+    //                 Navigator.pushNamed(context, '/episodePage');
+    //               },
+    //               color: Colors.red[700],
+    //               label: Text(
+    //                 'Episode List',
+    //                 style: TextStyle(color: Colors.white, fontSize: 15),
+    //               ),
+    //             ),
+    //             RaisedButton.icon(
+    //               icon: Icon(
+    //                 Icons.people_outline,
+    //                 color: Colors.white,
+    //                 size: 15,
+    //               ),
+    //               onPressed: () {
+    //                 Navigator.pushNamed(context, '/castPage');
+    //               },
+    //               color: Colors.red[700],
+    //               label: Container(
+    //                 child: Padding(
+    //                   padding: const EdgeInsets.symmetric(horizontal: 2),
+    //                   child: Text(
+    //                     'Cast ',
+    //                     style: TextStyle(color: Colors.white, fontSize: 15),
+    //                   ),
+    //                 ),
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   ],
+    // );
   }
 }
