@@ -31,7 +31,11 @@ class _CastPageState extends State<CastPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Cast')),
+      backgroundColor: Colors.grey[900],
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text('Cast'),
+      ),
       body: data == null
           ? Center(child: CircularProgressIndicator())
           : CastList(data: data),

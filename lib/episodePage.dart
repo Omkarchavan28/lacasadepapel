@@ -31,7 +31,11 @@ class _EpisodePageState extends State<EpisodePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Episodes')),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text('Episodes'),
+      ),
       body: data == null
           ? Center(child: CircularProgressIndicator())
           : EpisodeList(data: data),
