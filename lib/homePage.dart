@@ -68,18 +68,13 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Container(
-            height: 300.0,
-            // decoration: BoxDecoration(
-            //     color: Colors.red, borderRadius: BorderRadius.circular(20)),
+              height: 300.0,
+              // decoration: BoxDecoration(
+              //     color: Colors.red, borderRadius: BorderRadius.circular(20)),
 
-            child:
-                // Image.network(data['image']['original']),
-                CachedNetworkImage(
-              imageUrl: "http://via.placeholder.com/350x150",
-              placeholder: (context, url) => CircularProgressIndicator(),
-              errorWidget: (context, url, error) => Icon(Icons.error),
-            ),
-          ),
+              child: Image(
+                  image:
+                      CachedNetworkImageProvider(data['image']['original']))),
           Container(
             child: Text(removeAllHtmlTags(data['summary'])),
           ),
@@ -140,8 +135,10 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Image.network(data['_embedded']['episodes'][index]
-                                  ['image']['original']),
+                              Image(
+                                  image: CachedNetworkImageProvider(
+                                      data['_embedded']['episodes'][index]
+                                          ['image']['original'])),
                               Text(
                                 removeAllHtmlTags(data['_embedded']['episodes']
                                     [index]['summary']),
