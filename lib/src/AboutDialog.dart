@@ -30,7 +30,9 @@ void buildCustomShowAboutDialog(BuildContext context) {
     context: context,
     applicationVersion: '1.0.0',
     applicationName: "La Casa De Papel",
-    applicationIcon: Icon(Icons.face),
+    applicationIcon: CircleAvatar(
+      backgroundImage: AssetImage("assets/icon.jpg"),
+    ),
     children: [
       Text(
         'La Casa De Papel Information App made using Tv-Maze API',
