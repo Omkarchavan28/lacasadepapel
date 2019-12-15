@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lacasadepapel/services/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({
@@ -8,6 +9,15 @@ class HomePage extends StatelessWidget {
   }) : super(key: key);
 
   final data;
+
+  _launchURL() async {
+    final url = data['officialSite'];
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,24 +41,38 @@ class HomePage extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(8),
                   width: 400,
-                  child: Text(removeAllHtmlTags(data['summary']),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 15, color: Colors.white)),
-                ),
-                RaisedButton.icon(
-                  icon: Icon(
-                    Icons.play_circle_outline,
-                    color: Colors.white,
-                    size: 25,
+                  child: Text(
+                    removeAllHtmlTags(data['summary']),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
-                  splashColor: Colors.black87,
-                  onPressed: () {},
-                  color: Colors.red[700],
-                  label: Text(
-                    'Watch Now on Netflix',
-                    style: TextStyle(
-                      fontSize: 18,
+                ),
+                Row(
+                  children: <Widget>[
+                    Genres(genres: data['genres'][0]),
+                    Genres(genres: data['genres'][1]),
+                    Genres(genres: data['genres'][2]),
+                  ],
+                ),
+                Container(
+                  margin: EdgeInsets.all(5),
+                  // width: 150,
+                  height: 50,
+                  child: RaisedButton.icon(
+                    icon: Icon(
+                      Icons.play_circle_outline,
                       color: Colors.white,
+                      size: 25,
+                    ),
+                    splashColor: Colors.black87,
+                    onPressed: _launchURL,
+                    color: Colors.red[700],
+                    label: Text(
+                      'Watch Now on Netflix',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -111,84 +135,29 @@ class HomePage extends StatelessWidget {
         ],
       ),
     );
-    // return Column(
-    //   children: <Widget>[
-    //     Container(
-    //       height: 300.0,
-    //       child: Image(
-    //         image: CachedNetworkImageProvider(data['image']['original']),
-    //       ),
-    //     ),
-    //     Container(
-    //       padding: EdgeInsets.all(10),
-    //       decoration: BoxDecoration(
-    //         color: Colors.white,
-    //         borderRadius: BorderRadius.circular(5),
-    //       ),
-    //       child: Text(
-    //         removeAllHtmlTags(data['summary']),
-    //         style: TextStyle(
-    //           fontSize: 20,
-    //           color: Colors.black,
-    //         ),
-    //       ),
-    //     ),
-    //     Card(
-    //       color: Colors.white,
-    //       child: Padding(
-    //         padding: const EdgeInsets.all(10.0),
-    //         child: Column(
-    //           children: <Widget>[
-    //             RaisedButton(
-    //               onPressed: () {},
-    //               color: Colors.red[700],
-    //               child: Text(
-    //                 'Watch Now on Netflix',
-    //                 style: TextStyle(
-    //                   color: Colors.white,
-    //                 ),
-    //               ),
-    //             ),
-    //             RaisedButton.icon(
-    //               icon: Icon(
-    //                 Icons.arrow_forward_ios,
-    //                 color: Colors.white,
-    //                 size: 15,
-    //               ),
-    //               onPressed: () {
-    //                 Navigator.pushNamed(context, '/episodePage');
-    //               },
-    //               color: Colors.red[700],
-    //               label: Text(
-    //                 'Episode List',
-    //                 style: TextStyle(color: Colors.white, fontSize: 15),
-    //               ),
-    //             ),
-    //             RaisedButton.icon(
-    //               icon: Icon(
-    //                 Icons.people_outline,
-    //                 color: Colors.white,
-    //                 size: 15,
-    //               ),
-    //               onPressed: () {
-    //                 Navigator.pushNamed(context, '/castPage');
-    //               },
-    //               color: Colors.red[700],
-    //               label: Container(
-    //                 child: Padding(
-    //                   padding: const EdgeInsets.symmetric(horizontal: 2),
-    //                   child: Text(
-    //                     'Cast ',
-    //                     style: TextStyle(color: Colors.white, fontSize: 15),
-    //                   ),
-    //                 ),
-    //               ),
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //     ),
-    //   ],
-    // );
+  }
+}
+
+class Genres extends StatelessWidget {
+  const Genres({
+    Key key,
+    @required this.genres,
+  }) : super(key: key);
+
+  final genres;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(5.0),
+      padding: const EdgeInsets.all(3.0),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.red),
+      ),
+      child: Text(
+        genres,
+        style: TextStyle(fontSize: 15, color: Colors.white),
+      ),
+    );
   }
 }

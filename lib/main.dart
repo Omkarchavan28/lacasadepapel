@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'La Casa De Papel',
       theme: new ThemeData(
         primarySwatch: Colors.red,
-        secondaryHeaderColor: Colors.white,
+        accentColor: Colors.amberAccent,
       ),
       initialRoute: '/',
       routes: {
