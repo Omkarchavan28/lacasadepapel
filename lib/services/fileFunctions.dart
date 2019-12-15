@@ -24,7 +24,7 @@ Future<String> readContent(String fileName) async {
     return contents;
   } catch (e) {
     // If encountering an error, return
-    print(e);
+
     Future<String> contents;
     return contents;
   }

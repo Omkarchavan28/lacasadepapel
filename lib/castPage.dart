@@ -75,7 +75,7 @@ class _CastPageState extends State<CastPage> {
       );
 
   Future getData() async {
-    String _data = await readContent('homePage');
+    String _data = await readContent('castPage');
     if (_data == null) {
       try {
         final result = await InternetAddress.lookup('google.com');
@@ -83,7 +83,7 @@ class _CastPageState extends State<CastPage> {
           http.Response res = await http.get(
               'http://api.tvmaze.com/singlesearch/shows?q=money%20heist&embed=cast');
           data = jsonDecode(res.body);
-          writeContent('castPage', data);
+          writeContent('castPage', res.body);
 
           setState(() {});
         }

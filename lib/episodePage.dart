@@ -75,7 +75,7 @@ class _EpisodePageState extends State<EpisodePage> {
       );
 
   Future getData() async {
-    String _data = await readContent('homePage');
+    String _data = await readContent('episodePage');
     if (_data == null) {
       try {
         final result = await InternetAddress.lookup('google.com');
@@ -83,7 +83,7 @@ class _EpisodePageState extends State<EpisodePage> {
           http.Response res = await http.get(
               'http://api.tvmaze.com/singlesearch/shows?q=money%20heist&embed=episodes');
           data = jsonDecode(res.body);
-          writeContent('episodePage', data);
+          writeContent('episodePage', res.body);
           setState(() {});
         }
       } on SocketException catch (_) {

@@ -83,8 +83,8 @@ class _HomeState extends State<Home> {
       try {
         final result = await InternetAddress.lookup('google.com');
         if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-          http.Response res = await http.get(
-              'http://api.tvmaze.com/singlesearch/shows?q=money%20heist&embed=episodes');
+          http.Response res = await http
+              .get('http://api.tvmaze.com/singlesearch/shows?q=money%20heist');
           data = jsonDecode(res.body);
           setState(() {});
           writeContent('homePage', res.body);
@@ -94,7 +94,6 @@ class _HomeState extends State<Home> {
       }
     } else {
       data = jsonDecode(_data);
-      print(_data);
       setState(() {});
     }
   }
