@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lacasadepapel/customAboutDialog.dart';
+import 'package:lacasadepapel/services/basicFunctions.dart';
+import 'package:lacasadepapel/src/customAboutDialog.dart';
 
 class AboutInfoButtom extends StatelessWidget {
   const AboutInfoButtom({
@@ -40,11 +41,14 @@ void buildCustomShowAboutDialog(BuildContext context) {
       SizedBox(
         height: 10,
       ),
-      Text(
-        'www.tvmaze.com',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: Colors.red,
+      InkWell(
+        onTap: () => launchURL('www.tvmaze.com'),
+        child: SelectableText(
+          'www.tvmaze.com',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.red,
+          ),
         ),
       ),
       SizedBox(height: 20),
@@ -87,10 +91,13 @@ void buildCustomShowAboutDialog(BuildContext context) {
             indent: 100,
             endIndent: 100,
           ),
-          Text(
-            'chavanomkar245@gmail.com',
-            style: TextStyle(
-              color: Colors.red,
+          InkWell(
+            onTap: () => launchURL('chavanomkar245@gmail.com'),
+            child: SelectableText(
+              'chavanomkar245@gmail.com',
+              style: TextStyle(
+                color: Colors.red,
+              ),
             ),
           ),
         ],
@@ -110,10 +117,13 @@ void buildCustomShowAboutDialog(BuildContext context) {
             indent: 100,
             endIndent: 100,
           ),
-          Text(
-            'https://github.com/Omkarchavan28',
-            style: TextStyle(
-              color: Colors.red,
+          InkWell(
+            onTap: () => launchURL('https://github.com/Omkarchavan28'),
+            child: SelectableText(
+              'https://github.com/Omkarchavan28',
+              style: TextStyle(
+                color: Colors.red,
+              ),
             ),
           ),
         ],
@@ -133,10 +143,13 @@ void buildCustomShowAboutDialog(BuildContext context) {
             indent: 100,
             endIndent: 100,
           ),
-          Text(
-            'twitter.com/meomkarchavan',
-            style: TextStyle(
-              color: Colors.red,
+          InkWell(
+            onTap: () => launchURL('twitter.com/meomkarchavan'),
+            child: SelectableText(
+              'twitter.com/meomkarchavan',
+              style: TextStyle(
+                color: Colors.red,
+              ),
             ),
           ),
         ],
