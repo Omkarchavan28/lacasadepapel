@@ -1,4 +1,4 @@
-package com.example.lacasadepapel
+package com.omkar.lacasadepapel
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
